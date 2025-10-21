@@ -11,19 +11,19 @@ interface Testimonial {
 const TestimonialsSection: React.FC = () => {
   const testimonials: Testimonial[] = [
     {
-      quote: "Ziptie's API is incredibly fast and reliable. We've processed millions of URLs without a single issue.",
+      quote: "The Redis microservice does exactly what it says on the tin—deterministic keys, TTL, and graceful fallbacks.",
       author: "Sarah Chen",
-      role: "Lead Developer at TechCorp",
+      role: "Platform Engineer @ Northwind",
       avatar: "SC"
     },
     {
-      quote: "The analytics are game-changing. We can track user engagement like never before.",
+      quote: "We deploy mvp-backend alongside our auth proxy. Its key verification saved us days of boilerplate.",
       author: "Mike Rodriguez", 
-      role: "CTO at StartupXYZ",
+      role: "CTO @ Loopstack",
       avatar: "MR"
     },
     {
-      quote: "Best URL shortening API we've used. The documentation is perfect and support is amazing.",
+      quote: "testtie runs in CI and hammers the SDK before each publish. The package has never shipped broken.",
       author: "Alex Kim",
       role: "Full Stack Developer",
       avatar: "AK"
@@ -36,7 +36,7 @@ const TestimonialsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">
+            <span className="heading-glow">
               Loved by Developers
             </span>
           </h2>

@@ -1,7 +1,22 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AnimatedBackground, Navigation, Footer } from './components/homePage';
-import { HomePage } from './pages';
+import { HomePage, PricingPage, ProfilePage } from './pages';
+import { useAuth } from './contexts/AuthContext';
+
+const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { token, loading } = useAuth();
+
+  if (loading) {
+    return null;
+  }
+
+  if (!token) {
+    return <Navigate to="/" replace />;
+  }
+
+  return <>{children}</>;
+};
 
 function App() {
   return (
@@ -12,7 +27,15 @@ function App() {
         
         <Routes>
           <Route path="/" element={<HomePage />} />
-          {/* Add more routes here as needed */}
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route
+            path="/profile"
+            element={(
+              <PrivateRoute>
+                <ProfilePage />
+              </PrivateRoute>
+            )}
+          />
         </Routes>
         
         <Footer />

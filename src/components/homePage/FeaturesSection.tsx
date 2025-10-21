@@ -1,5 +1,5 @@
 import React from 'react';
-import { Zap, Shield, BarChart3, Code, Globe, TrendingUp } from 'lucide-react';
+import { Package, Shield, Server, Code2, TestTube2, Activity } from 'lucide-react';
 
 interface Feature {
   icon: React.ReactNode;
@@ -10,34 +10,34 @@ interface Feature {
 const FeaturesSection: React.FC = () => {
   const features: Feature[] = [
     {
-      icon: <Zap className="h-8 w-8" />,
-      title: "Lightning Fast",
-      description: "Generate shortened URLs in milliseconds with our optimized infrastructure"
+      icon: <Package className="h-8 w-8" />,
+      title: "Drop-in SDK",
+      description: "Import @ziptie-shortlink/ziptie-shortlinks and call createShortUrl with zero manual wiring."
     },
     {
       icon: <Shield className="h-8 w-8" />,
-      title: "Enterprise Security",
-      description: "Military-grade encryption and advanced threat protection for all links"
+      title: "Key Verification",
+      description: "mvp-backend validates private keys before your request ever touches Redis."
     },
     {
-      icon: <BarChart3 className="h-8 w-8" />,
-      title: "Advanced Analytics",
-      description: "Comprehensive click tracking, geographic data, and performance insights"
+      icon: <Server className="h-8 w-8" />,
+      title: "Redis-native Links",
+      description: "The dedicated Redis microservice issues 12-char keys with precise TTL enforcement."
     },
     {
-      icon: <Code className="h-8 w-8" />,
-      title: "Developer First",
-      description: "RESTful API with SDKs for Python, Node.js, PHP, and more"
+      icon: <Code2 className="h-8 w-8" />,
+      title: "Gateway Routing",
+      description: "mvp-backend fans out to the microservice and injects base URLs, analytics hooks, and policy checks."
     },
     {
-      icon: <Globe className="h-8 w-8" />,
-      title: "Global CDN",
-      description: "Worldwide edge locations ensure fastest redirect times globally"
+      icon: <TestTube2 className="h-8 w-8" />,
+      title: "CI-friendly",
+      description: "testtie exercises the package against live Redis instances so regressions never ship."
     },
     {
-      icon: <TrendingUp className="h-8 w-8" />,
-      title: "Smart Routing",
-      description: "AI-powered link optimization for maximum engagement rates"
+      icon: <Activity className="h-8 w-8" />,
+      title: "Always Observable",
+      description: "Health checks from the SDK bubble up latency metrics and backend status in real time."
     }
   ];
 
@@ -47,13 +47,12 @@ const FeaturesSection: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">
+            <span className="heading-glow">
               Built for Speed & Scale
             </span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Every feature engineered for maximum performance, from sub-millisecond redirects 
-            to real-time analytics that power your growth.
+            One monorepo delivers the SDK, key-verifying gateway, and Redis microservice—ready to wire into your stack without custom glue.
           </p>
         </div>
 
@@ -79,15 +78,15 @@ const FeaturesSection: React.FC = () => {
           <div className="inline-flex items-center space-x-8 bg-gray-900/60 backdrop-blur-lg border border-orange-500/30 rounded-full px-8 py-4">
             <div className="flex items-center space-x-2">
               <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-sm text-gray-300">99.99% Uptime</span>
+              <span className="text-sm text-gray-300">Key-auth Gateway</span>
             </div>
             <div className="flex items-center space-x-2">
               <div className="w-3 h-3 bg-orange-400 rounded-full animate-pulse"></div>
-              <span className="text-sm text-gray-300">&lt;10ms Response</span>
+              <span className="text-sm text-gray-300">Redis-backed TTL</span>
             </div>
             <div className="flex items-center space-x-2">
               <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
-              <span className="text-sm text-gray-300">Global CDN</span>
+              <span className="text-sm text-gray-300">SDK Validation</span>
             </div>
           </div>
         </div>

@@ -5,7 +5,6 @@ export { default as FeaturesSection } from './FeaturesSection';
 export { default as StatsSection } from './StatsSection';
 export { default as TestimonialsSection } from './TestimonialsSection';
 export { default as IntegrationSection } from './IntegrationSection';
-export { default as LiveDemoSection } from './LiveDemoSection';
 export { default as AdvancedFeaturesSection } from './AdvancedFeaturesSection';
 export { default as PricingSection } from './PricingSection';
 export { default as CTASection } from './CTASection';

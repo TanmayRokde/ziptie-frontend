@@ -10,19 +10,27 @@ const Footer: React.FC = () => {
             <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center shadow-lg shadow-orange-500/25">
               <Link className="h-5 w-5 text-white" />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">
+            <span className="text-xl font-bold heading-glow">
               Ziptie
             </span>
           </div>
           <div className="flex items-center space-x-8 text-gray-400">
-            <a href="#" className="hover:text-orange-400 transition-colors">Privacy</a>
-            <a href="#" className="hover:text-orange-400 transition-colors">Terms</a>
-            <a href="#" className="hover:text-orange-400 transition-colors">Support</a>
-            <a href="#" className="hover:text-orange-400 transition-colors">API Docs</a>
+            <a href="https://www.npmjs.com/package/@ziptie-shortlink/ziptie-shortlinks" className="hover:text-orange-400 transition-colors" target="_blank" rel="noreferrer">
+              NPM Package
+            </a>
+            <a href="https://github.com/tanmayrokde/ziptie/tree/main/ziptie-mvp-backend" className="hover:text-orange-400 transition-colors" target="_blank" rel="noreferrer">
+              mvp-backend
+            </a>
+            <a href="https://github.com/tanmayrokde/ziptie/tree/main/ziptie-redis-microservice" className="hover:text-orange-400 transition-colors" target="_blank" rel="noreferrer">
+              Redis Microservice
+            </a>
+            <a href="https://github.com/tanmayrokde/ziptie/tree/main/testtie" className="hover:text-orange-400 transition-colors" target="_blank" rel="noreferrer">
+              testtie
+            </a>
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-700/50 text-center text-gray-400">
-          <p>&copy; 2024 Ziptie. All rights reserved. Built for developers who demand speed.</p>
+          <p>&copy; 2024 Ziptie. SDK + gateway + Redis microservice maintained in one monorepo.</p>
         </div>
       </div>
     </footer>

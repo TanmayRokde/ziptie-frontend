@@ -3,11 +3,9 @@ import {
   HeroSection,
   FeaturesSection,
   StatsSection,
-  TestimonialsSection,
   IntegrationSection,
-  LiveDemoSection,
   AdvancedFeaturesSection,
-  PricingSection,
+  TestimonialsSection,
   CTASection
 } from '../components/homePage';
 
@@ -17,11 +15,9 @@ const HomePage: React.FC = () => {
       <HeroSection />
       <FeaturesSection />
       <StatsSection />
-      <TestimonialsSection />
       <IntegrationSection />
-      <LiveDemoSection />
       <AdvancedFeaturesSection />
-      <PricingSection />
+      <TestimonialsSection />
       <CTASection />
     </>
   );

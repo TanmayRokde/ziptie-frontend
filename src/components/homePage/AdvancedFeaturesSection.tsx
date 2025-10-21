@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, BarChart3, Globe, Code, Zap, Star, TrendingUp, Sparkles } from 'lucide-react';
+import { ShieldCheck, Timer, Link2, Activity, CircuitBoard, RefreshCw, LifeBuoy, GitBranch } from 'lucide-react';
 
 interface AdvancedFeature {
   icon: React.ReactNode;
@@ -9,14 +9,14 @@ interface AdvancedFeature {
 
 const AdvancedFeaturesSection: React.FC = () => {
   const features: AdvancedFeature[] = [
-    { icon: <Shield className="h-6 w-6" />, title: "Link Expiration", desc: "Set custom expiry dates" },
-    { icon: <BarChart3 className="h-6 w-6" />, title: "Real-time Analytics", desc: "Live click tracking" },
-    { icon: <Globe className="h-6 w-6" />, title: "Custom Domains", desc: "Use your own domain" },
-    { icon: <Code className="h-6 w-6" />, title: "Webhook Support", desc: "Real-time notifications" },
-    { icon: <Zap className="h-6 w-6" />, title: "Bulk Operations", desc: "Process thousands at once" },
-    { icon: <Star className="h-6 w-6" />, title: "QR Codes", desc: "Auto-generated QR codes" },
-    { icon: <TrendingUp className="h-6 w-6" />, title: "A/B Testing", desc: "Split traffic testing" },
-    { icon: <Sparkles className="h-6 w-6" />, title: "Smart Redirects", desc: "Device-based routing" }
+    { icon: <ShieldCheck className="h-6 w-6" />, title: "Private Key Auth", desc: "mvp-backend rejects unsigned calls before they reach Redis." },
+    { icon: <Timer className="h-6 w-6" />, title: "Guaranteed TTL", desc: "Redis EX flags guarantee links retire right on schedule." },
+    { icon: <Link2 className="h-6 w-6" />, title: "Base URL Templates", desc: "Configure BASE_SHORT_URL once and every short link inherits it." },
+    { icon: <Activity className="h-6 w-6" />, title: "Health Endpoints", desc: "SDK ships with checkHealth for upstream uptime probes." },
+    { icon: <CircuitBoard className="h-6 w-6" />, title: "Safe Fan-out", desc: "Gateway wraps axios with timeouts and structured error handling." },
+    { icon: <RefreshCw className="h-6 w-6" />, title: "Key Rotation", desc: "API keys are stored hashed in Redis and regenerated on demand." },
+    { icon: <LifeBuoy className="h-6 w-6" />, title: "CI Harness", desc: "testtie keeps your release pipeline honest with real requests." },
+    { icon: <GitBranch className="h-6 w-6" />, title: "Composable", desc: "Every repo is open-source and designed for custom middlewares." }
   ];
 
   return (
@@ -24,7 +24,7 @@ const AdvancedFeaturesSection: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">
+            <span className="heading-glow">
               Advanced Features
             </span>
           </h2>

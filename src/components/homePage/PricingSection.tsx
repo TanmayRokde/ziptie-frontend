@@ -12,24 +12,41 @@ interface PricingPlan {
 const PricingSection: React.FC = () => {
   const pricingPlans: PricingPlan[] = [
     {
-      name: "Starter",
+      name: "Local Dev",
       price: "$0",
-      period: "Forever Free",
-      features: ["1,000 URLs/month", "Basic analytics", "Community support", "99.9% uptime"],
+      period: "Open Source",
+      features: [
+        "SDK + Redis microservice",
+        "Env-based configuration",
+        "testtie regression suite",
+        "Community Discord"
+      ],
       popular: false
     },
     {
-      name: "Professional",
+      name: "Launch Team",
       price: "$29",
       period: "per month",
-      features: ["50,000 URLs/month", "Advanced analytics", "Priority support", "Custom domains", "Bulk operations"],
+      features: [
+        "Hosted mvp-backend with key vault",
+        "Managed Redis microservice",
+        "Usage dashboards & webhooks",
+        "On-call engineer handoff",
+        "Key rotation reminders"
+      ],
       popular: true
     },
     {
       name: "Enterprise",
       price: "Custom",
-      period: "Contact us",
-      features: ["Unlimited URLs", "White-label solution", "Dedicated support", "SLA guarantee", "Custom integrations"],
+      period: "Secure contract",
+      features: [
+        "Private tenancy & SSO",
+        "Dedicated Redis cluster integration",
+        "Custom compliance reviews",
+        "Quarterly architecture sessions",
+        "Uptime & remediation SLAs"
+      ],
       popular: false
     }
   ];
@@ -39,7 +56,7 @@ const PricingSection: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">
+            <span className="heading-glow">
               Simple, Transparent Pricing
             </span>
           </h2>
