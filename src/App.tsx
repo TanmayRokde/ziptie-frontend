@@ -21,7 +21,7 @@ const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-black text-white overflow-hidden relative">
+      <div className="min-h-screen bg-black text-white relative">
         <AnimatedBackground />
         <Navigation />
         
