@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AnimatedBackground, Navigation, Footer } from './components/homePage';
 import { HomePage, PricingPage, ProfilePage } from './pages';
 import { useAuth } from './contexts/AuthContext';
-
+import ShortUrlRedirector from './utils/ShortUrlRedirector';
 const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { token, loading } = useAuth();
 
@@ -36,6 +36,7 @@ function App() {
               </PrivateRoute>
             )}
           />
+          <Route path="/:shortCode" element={<ShortUrlRedirector />} />
         </Routes>
         
         <Footer />
