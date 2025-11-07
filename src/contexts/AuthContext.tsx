@@ -27,6 +27,8 @@ interface UserDomain {
 interface UserProfile extends AuthUser {
   domains: UserDomain[];
   createdAt?: string;
+  publicKey?: string | null;
+  privateKey?: string | null;
 }
 
 interface AuthContextType {

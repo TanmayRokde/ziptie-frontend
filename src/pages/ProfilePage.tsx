@@ -99,11 +99,6 @@ const ProfilePage: React.FC = () => {
     }
   };
 
-  const handleCloseKeyModal = () => {
-    setGeneratedKey(null);
-    setKeyGenerationError(null);
-  };
-
   const resetForm = () => {
     setDomainForm({ domain: '', pathPrefix: '' });
     setDomainError(null);
@@ -163,87 +158,6 @@ const ProfilePage: React.FC = () => {
 
   return (
     <>
-      {/* API Key Generation Modal */}
-      {generatedKey && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-gray-900/95 backdrop-blur-lg border border-gray-700/50 rounded-2xl p-8 w-full max-w-2xl relative">
-            <div className="flex items-start gap-3 mb-6 bg-orange-500/10 border border-orange-500/30 rounded-xl p-4">
-              <AlertTriangle className="h-6 w-6 text-orange-400 flex-shrink-0 mt-0.5" />
-              <div>
-                <h3 className="font-semibold text-orange-300 mb-1">Important: One-Time Display</h3>
-                <p className="text-sm text-orange-200/80">
-                  This is your only chance to see this private key. Make sure to copy it and store it securely.
-                  You won't be able to retrieve it again.
-                </p>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="text-sm font-medium text-gray-300">Private Key</label>
-                  <button
-                    onClick={() => handleCopyKey(generatedKey.privateKey)}
-                    className="text-sm flex items-center gap-2 text-gray-300 hover:text-orange-400 transition-colors"
-                  >
-                    {copiedKey ? <CheckCircle className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                    {copiedKey ? 'Copied' : 'Copy'}
-                  </button>
-                </div>
-                <div className="bg-black/60 border border-gray-800/60 rounded-xl p-4 font-mono text-xs text-orange-300 break-all max-h-40 overflow-y-auto">
-                  {generatedKey.privateKey}
-                </div>
-                <p className="text-xs text-gray-500 mt-2">
-                  Use this base64 key in the <code className="font-mono text-orange-300">private-key</code> header when calling the gateway.
-                </p>
-              </div>
-
-              <div>
-                <label className="text-sm font-medium text-gray-300 mb-2 block">Key Details</label>
-                <div className="bg-black/40 border border-gray-800/60 rounded-xl p-4 space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Expires At:</span>
-                    <span className="text-white font-medium">{new Date(generatedKey.expiresAt).toLocaleString()}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">TTL:</span>
-                    <span className="text-white font-medium">{generatedKey.ttlSeconds} seconds</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <button
-              onClick={handleCloseKeyModal}
-              className="w-full mt-6 bg-gradient-to-r from-orange-500 to-orange-600 py-3 rounded-lg font-semibold hover:shadow-xl hover:shadow-orange-500/40 transition-all duration-300"
-            >
-              I've Saved My Key
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Key Generation Error Modal */}
-      {keyGenerationError && !generatedKey && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-gray-900/95 backdrop-blur-lg border border-gray-700/50 rounded-2xl p-8 w-full max-w-md relative">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <AlertTriangle className="h-8 w-8 text-red-400" />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Generation Failed</h3>
-              <p className="text-gray-400 mb-6">{keyGenerationError}</p>
-              <button
-                onClick={handleCloseKeyModal}
-                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 py-3 rounded-lg font-semibold hover:shadow-xl hover:shadow-orange-500/40 transition-all duration-300"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       <div className="px-6 py-20 max-w-5xl mx-auto min-h-[70vh]">
         <div className="bg-gray-900/40 border border-gray-800/60 rounded-3xl p-8 backdrop-blur-lg">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
@@ -290,26 +204,54 @@ const ProfilePage: React.FC = () => {
               <div className="bg-black/40 border border-gray-800/60 rounded-2xl p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-semibold text-white">Private API Key</h2>
-                  {profile.apiKey ? (
+                  {(generatedKey || profile.privateKey) && (
                     <button
-                      onClick={() => handleCopyKey()}
+                      onClick={() => handleCopyKey(generatedKey?.privateKey || profile.privateKey || undefined)}
                       className="text-sm flex items-center gap-2 text-gray-300 hover:text-orange-400 transition-colors"
                     >
                       {copiedKey ? <CheckCircle className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                       {copiedKey ? 'Copied' : 'Copy'}
                     </button>
-                  ) : null}
+                  )}
                 </div>
                 <p className="text-xs text-gray-500 mb-3">
                   Add this base64 key to the <code className="font-mono text-orange-300">private-key</code> header when calling the gateway.
                 </p>
-                {/* {profile.apiKey ? (
-                  <div className="bg-black/60 border border-gray-800/60 rounded-xl p-4 font-mono text-xs text-orange-300 break-all">
-                    {profile.apiKey}
+
+                {keyGenerationError && (
+                  <div className="bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2 text-sm text-red-300 mb-4">
+                    {keyGenerationError}
                   </div>
-                ) : ( */}
+                )}
+
+                {generatedKey || profile.privateKey ? (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-sm font-medium text-gray-300 mb-2 block">Private Key</label>
+                      <div className="bg-black/60 border border-gray-800/60 rounded-xl p-4 font-mono text-xs text-orange-300 break-all max-h-40 overflow-y-auto">
+                        {generatedKey ? generatedKey.privateKey : profile.privateKey}
+                      </div>
+                    </div>
+
+                    {generatedKey && (
+                      <div>
+                        <label className="text-sm font-medium text-gray-300 mb-2 block">Key Details</label>
+                        <div className="bg-black/40 border border-gray-800/60 rounded-xl p-4 space-y-2 text-sm">
+                          <div className="flex justify-between">
+                            <span className="text-gray-400">Expires At:</span>
+                            <span className="text-white font-medium">{new Date(generatedKey.expiresAt).toLocaleString()}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-400">TTL:</span>
+                            <span className="text-white font-medium">{generatedKey.ttlSeconds} seconds</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : (
                   <div className="space-y-3">
-                    {/* <p className="text-sm text-gray-400">No API key generated yet. Click the button below to generate your private API key.</p> */}
+                    <p className="text-sm text-gray-400">No API key generated yet. Click the button below to generate your private API key.</p>
                     <button
                       onClick={handleGenerateKey}
                       disabled={generatingKey}
@@ -319,7 +261,7 @@ const ProfilePage: React.FC = () => {
                       {generatingKey ? 'Generating...' : 'Generate API Key'}
                     </button>
                   </div>
-                {/* )} */}
+                )}
               </div>
             </div>
 
