@@ -40,7 +40,7 @@ const Signup: React.FC<SignupProps> = ({ isOpen, onClose, onSwitchToLogin }) => 
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[1000] grid place-items-center bg-black/60 backdrop-blur-sm p-4">
       <div className="bg-gray-900/95 backdrop-blur-lg border border-gray-700/50 rounded-2xl p-8 w-full max-w-md relative">
         <button
           onClick={onClose}
