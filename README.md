@@ -1,60 +1,128 @@
 # ziptie-frontend
 
-Vite + React + TypeScript single-page app for the ZipTie dashboard and marketing site. It renders the public landing page, auth flows, pricing, and logged-in profile, and talks to the MVP backend for dynamic data.
+![React](https://img.shields.io/badge/react-18.x-61dafb)
+![Vite](https://img.shields.io/badge/build-vite%205-purple)
+![TypeScript](https://img.shields.io/badge/language-typescript-blue)
+![Status](https://img.shields.io/badge/status-alpha-orange)
 
-## Features
+Vite + React + TypeScript application for the ZipTie experience. It ships a marketing site, authentication flows, profile dashboard, and a client-side short URL resolver powered by the MVP backend.
 
-- Animated marketing homepage with hero, feature, pricing, testimonial, and CTA sections
-- Firebase-ready auth context with login/signup forms
-- Profile area that calls the backend for user data and short links
-- Tailwind CSS styling with Lucide icons
-- Client-side short link resolver component for public sharing
+---
 
-## Stack
+## Table of Contents
 
-- React 18 + React Router DOM 7
-- Vite build tooling with TypeScript
-- Tailwind CSS and PostCSS
-- Axios for API calls
+1. [Highlights](#highlights)
+2. [Architecture](#architecture)
+3. [Tech Stack](#tech-stack)
+4. [Prerequisites](#prerequisites)
+5. [Environment Variables](#environment-variables)
+6. [Getting Started](#getting-started)
+7. [Scripts](#scripts)
+8. [Project Structure](#project-structure)
+9. [Key Features](#key-features)
+10. [Deployment](#deployment)
+11. [Troubleshooting](#troubleshooting)
+
+---
+
+## Highlights
+
+- Marketing site with hero, features, pricing, testimonials, stats, and CTA sections.
+- Auth-ready login/signup forms with context-driven state.
+- Profile page that consumes protected APIs and renders user metadata/links.
+- `ShortUrlRedirector` component for public short link redirection.
+- Tailwind-driven design system with Lucide icons.
+
+## Architecture
+
+```
+┌────────────┐       ┌────────────────┐
+│ React SPA  │ ───►  │ Vite dev server│
+└────────────┘       └────────────────┘
+        │                    │
+        │  Axios calls       │
+        ▼                    ▼
+┌────────────────────────────────────┐
+│ ziptie-mvp-backend (REST API)      │
+└────────────────────────────────────┘
+```
+
+Routing is handled client-side via React Router DOM, while API calls go through Axios to the backend base URL defined at build time.
+
+## Tech Stack
+
+- **Core:** React 18, TypeScript, Vite
+- **Routing:** React Router DOM 7
+- **Styling:** Tailwind CSS, PostCSS, custom CSS helpers
+- **State/Auth:** React Context (`src/contexts/AuthContext.tsx`)
+- **Icons:** `lucide-react`
 
 ## Prerequisites
 
 - Node.js 18+
-- pnpm (recommended) or npm
+- pnpm (preferred) or npm
 
-## Environment
+## Environment Variables
 
-Create `.env` (or `.env.local`) at the repo root and configure:
+Create `.env` (or `.env.local`) with:
 
 ```
 VITE_API_BASE_URL=http://localhost:4000/api
 ```
 
-This is used for auth/login, profile data, and the short link resolver. Add any Firebase configuration keys required by `src/firebase/config.ts` if you wire auth to a real project.
+Add Firebase values (see `src/firebase/config.ts`) when integrating with a real project.
 
-## Scripts
+## Getting Started
 
 ```bash
 pnpm install
-pnpm dev      # start Vite dev server with HMR
-pnpm build    # type-check + production build to dist/
-pnpm preview  # preview build locally
-pnpm lint     # run ESLint
+pnpm dev
 ```
+
+Visit `http://localhost:5173` (default Vite port). The dev server proxies API calls directly to the configured backend URL.
+
+## Scripts
+
+| Command | Description |
+| ------- | ----------- |
+| `pnpm dev` | Start Vite dev server with HMR |
+| `pnpm build` | Type-check + production bundle in `dist/` |
+| `pnpm preview` | Serve the production build locally |
+| `pnpm lint` | Run ESLint across the project |
 
 ## Project Structure
 
 ```
 src/
-  components/        # marketing + auth UI
-  pages/             # route-level screens
+  components/
+    auth/
+    homePage/
+  pages/
   contexts/AuthContext.tsx
   utils/ShortUrlRedirector.tsx
-  main.tsx / App.tsx
+  App.tsx
+  main.tsx
 ```
 
-Routes are wired in `src/App.tsx`. Styling lives in `src/index.css` and Tailwind config files.
+Routes are declared in `src/App.tsx`. Styling hooks live in `src/index.css`, `tailwind.config.js`, and `postcss.config.js`.
+
+## Key Features
+
+- **Animated hero + sections:** See `src/components/homePage/*`.
+- **Auth flow:** `src/components/auth` plus `AuthContext` for session storage.
+- **Profile dashboard:** `src/pages/ProfilePage.tsx` fetches data from `/users/me`.
+- **Redirect logic:** `src/utils/ShortUrlRedirector.tsx` posts to `/shortlink/resolve`.
 
 ## Deployment
 
-The repo ships with `vercel.json`. Run `pnpm build` and deploy the `dist/` directory to Vercel or any static hosting provider. Remember to set `VITE_API_BASE_URL` in the hosting provider’s environment settings.
+1. `pnpm build`
+2. Deploy the `dist/` folder (Vercel configuration provided via `vercel.json`)
+3. Set `VITE_API_BASE_URL` in your hosting provider’s environment variables
+
+Remember to rebuild whenever env vars change—Vite inlines them at build time.
+
+## Troubleshooting
+
+- **Blank page after deploy:** Ensure `VITE_API_BASE_URL` points to an accessible HTTPS endpoint.
+- **CORS failures:** Update backend CORS policy to include your frontend origin.
+- **Firebase errors:** Supply valid config in `src/firebase/config.ts` or stub out Firebase usage during development.
