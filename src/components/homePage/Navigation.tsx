@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link as LinkIcon, Menu, X } from 'lucide-react';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ const primaryLinks = [
   },
   {
     label: 'GitHub',
-    href: 'https://github.com/tanmayrokde/ziptie',
+    href: 'https://github.com/stars/TanmayRokde/lists/ziptite',
     external: true
   }
 ];
@@ -47,6 +47,14 @@ const Navigation: React.FC = () => {
     setShowSignupModal(false);
     setShowLoginModal(true);
   };
+
+  useEffect(() => {
+    const handleOpenLogin = () => setShowLoginModal(true);
+    window.addEventListener('ziptie-open-login', handleOpenLogin);
+    return () => {
+      window.removeEventListener('ziptie-open-login', handleOpenLogin);
+    };
+  }, []);
 
   return (
     <>

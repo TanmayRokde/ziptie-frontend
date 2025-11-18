@@ -12,7 +12,7 @@ const FeaturesSection: React.FC = () => {
     {
       icon: <Package className="h-8 w-8" />,
       title: "Drop-in SDK",
-      description: "Import @ziptie-shortlink/ziptie-shortlinks and call createShortUrl with zero manual wiring."
+      description: "Import ziptie-shortlinks and call createShortUrl with zero manual wiring."
     },
     {
       icon: <Shield className="h-8 w-8" />,

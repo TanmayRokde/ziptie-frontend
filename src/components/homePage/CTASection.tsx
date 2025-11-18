@@ -19,16 +19,16 @@ const CTASection: React.FC = () => {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
           <a
-            href="https://www.npmjs.com/package/@ziptie-shortlink/ziptie-shortlinks"
+            href="https://www.npmjs.com/package/ziptie-shortlinks"
             className="bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-2xl hover:shadow-orange-500/50 transition-all duration-300 transform hover:-translate-y-2 hover:scale-110 group"
             target="_blank"
             rel="noreferrer"
           >
-            npm install @ziptie-shortlink/ziptie-shortlinks
+            ziptie-shortlinks SDK
             <ArrowRight className="inline ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform" />
           </a>
           <a
-            href="https://github.com/tanmayrokde/ziptie"
+            href="https://github.com/stars/TanmayRokde/lists/ziptite"
             className="border border-gray-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-800/50 hover:border-orange-400 transition-all duration-300 flex items-center justify-center backdrop-blur-sm hover:scale-105"
             target="_blank"
             rel="noreferrer"

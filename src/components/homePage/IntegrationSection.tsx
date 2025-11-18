@@ -3,7 +3,7 @@ import React from 'react';
 const steps = [
   {
     title: 'Install & point',
-    description: 'Add @ziptie-shortlink/ziptie-shortlinks and set MVP_BACKEND_URL to the gateway endpoint.'
+    description: 'Add ziptie-shortlinks and set MVP_BACKEND_URL to the gateway endpoint.'
   },
   {
     title: 'Authenticate once',
@@ -15,7 +15,7 @@ const steps = [
   }
 ];
 
-const nodeSnippet = `import { createShortUrl } from '@ziptie-shortlink/ziptie-shortlinks';
+const nodeSnippet = `import { createShortUrl } from 'ziptie-shortlinks';
 
 process.env.MVP_BACKEND_URL = 'https://mvp-backend.ziptie.dev/api/shortlink';
 

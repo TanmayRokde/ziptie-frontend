@@ -10,7 +10,7 @@ interface Stat {
 const StatsSection: React.FC = () => {
   const stats: Stat[] = [
     {
-      title: "@ziptie-shortlink/ziptie-shortlinks",
+      title: "ziptie-shortlinks",
       description: "Published Node SDK that wraps our backend contracts and ships TypeScript typings.",
       icon: <Code className="h-6 w-6" />
     },

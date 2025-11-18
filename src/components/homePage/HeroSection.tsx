@@ -9,6 +9,7 @@ import {
   Database,
   Code
 } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
 
 const callouts = [
   {
@@ -41,6 +42,10 @@ const { data } = await response.json();
 console.log(data.shortUrl);`;
 
 const HeroSection: React.FC = () => {
+  const { currentUser } = useAuth();
+  const requestLoginModal = () => {
+    window.dispatchEvent(new Event('ziptie-open-login'));
+  };
   const [demoUrl, setDemoUrl] = useState('');
   const [shortUrl, setShortUrl] = useState('https://links.ziptie.dev/demo123');
   const [copiedLink, setCopiedLink] = useState(false);
@@ -54,6 +59,12 @@ const HeroSection: React.FC = () => {
   });
 
   const handleShorten = async () => {
+    if (!currentUser) {
+      setDemoError('Please sign up or log in to shorten links.');
+      requestLoginModal();
+      return;
+    }
+
     const cleaned = demoUrl.trim();
     if (!cleaned) {
       setDemoError('Please enter a URL to shorten.');
@@ -154,13 +165,23 @@ const HeroSection: React.FC = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
-              <button className="bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-2xl hover:shadow-orange-500/50 transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 group">
+              <a
+                href="https://www.npmjs.com/package/@ziptiejs/ziptie-shortlinks"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-2xl hover:shadow-orange-500/50 transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 group text-center"
+              >
                 Install the SDK
                 <ArrowRight className="inline ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="border border-gray-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-800/50 hover:border-orange-400 transition-all duration-300 backdrop-blur-sm">
+              </a>
+              <a
+                href="https://github.com/stars/TanmayRokde/lists/ziptite"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-gray-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-800/50 hover:border-orange-400 transition-all duration-300 backdrop-blur-sm text-center"
+              >
                 Explore the Repos
-              </button>
+              </a>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-3">

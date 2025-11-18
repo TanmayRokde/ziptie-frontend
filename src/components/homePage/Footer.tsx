@@ -15,8 +15,11 @@ const Footer: React.FC = () => {
             </span>
           </div>
           <div className="flex items-center space-x-8 text-gray-400">
-            <a href="https://www.npmjs.com/package/@ziptie-shortlink/ziptie-shortlinks" className="hover:text-orange-400 transition-colors" target="_blank" rel="noreferrer">
-              NPM Package
+            <a href="https://www.npmjs.com/package/ziptie-shortlinks" className="hover:text-orange-400 transition-colors" target="_blank" rel="noreferrer">
+              SDK on npm
+            </a>
+            <a href="https://github.com/stars/TanmayRokde/lists/ziptite" className="hover:text-orange-400 transition-colors" target="_blank" rel="noreferrer">
+              GitHub Repo List
             </a>
             <a href="https://github.com/tanmayrokde/ziptie/tree/main/ziptie-mvp-backend" className="hover:text-orange-400 transition-colors" target="_blank" rel="noreferrer">
               mvp-backend
