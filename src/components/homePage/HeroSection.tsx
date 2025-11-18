@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Sparkles,
   ArrowRight,
@@ -7,30 +7,31 @@ import {
   ShieldCheck,
   Timer,
   Database,
-  Code
-} from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
+  Code,
+} from "lucide-react";
+import { useAuth } from "../../contexts/AuthContext";
 
 const callouts = [
   {
     icon: <ShieldCheck className="h-5 w-5 text-orange-400" />,
-    title: 'Gateway validation',
-    description: 'mvp-backend signs every request before Redis sees it.'
+    title: "Gateway validation",
+    description: "mvp-backend signs every request before Redis sees it.",
   },
   {
     icon: <Timer className="h-5 w-5 text-orange-400" />,
-    title: 'Deterministic TTL',
-    description: 'Expirations enforced with Redis EX flags—no cron required.'
+    title: "Deterministic TTL",
+    description: "Expirations enforced with Redis EX flags—no cron required.",
   },
   {
     icon: <Database className="h-5 w-5 text-orange-400" />,
-    title: 'Zero data leakage',
-    description: 'Payloads live under 12-char keys inside a hardened Redis cluster.'
-  }
+    title: "Zero data leakage",
+    description:
+      "Payloads live under 12-char keys inside a hardened Redis cluster.",
+  },
 ];
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000/api';
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:4000/api";
 
 const codeExample = `const response = await fetch('\${process.env.ZIPTIE_API_URL}/demo/shorten', {
   method: 'POST',
@@ -44,30 +45,30 @@ console.log(data.shortUrl);`;
 const HeroSection: React.FC = () => {
   const { currentUser } = useAuth();
   const requestLoginModal = () => {
-    window.dispatchEvent(new Event('ziptie-open-login'));
+    window.dispatchEvent(new Event("ziptie-open-login"));
   };
-  const [demoUrl, setDemoUrl] = useState('');
-  const [shortUrl, setShortUrl] = useState('https://links.ziptie.dev/demo123');
+  const [demoUrl, setDemoUrl] = useState("");
+  const [shortUrl, setShortUrl] = useState("https://links.ziptie.dev/demo123");
   const [copiedLink, setCopiedLink] = useState(false);
   const [copiedCode, setCopiedCode] = useState(false);
   const [demoLoading, setDemoLoading] = useState(false);
   const [demoError, setDemoError] = useState<string | null>(null);
   const [demoMeta, setDemoMeta] = useState({
     expiresIn: 3600,
-    userId: 'demo-user',
-    shortKey: 'demo123'
+    userId: "demo-user",
+    shortKey: "demo123",
   });
 
   const handleShorten = async () => {
     if (!currentUser) {
-      setDemoError('Please sign up or log in to shorten links.');
+      setDemoError("Please sign up or log in to shorten links.");
       requestLoginModal();
       return;
     }
 
     const cleaned = demoUrl.trim();
     if (!cleaned) {
-      setDemoError('Please enter a URL to shorten.');
+      setDemoError("Please enter a URL to shorten.");
       return;
     }
 
@@ -77,17 +78,17 @@ const HeroSection: React.FC = () => {
       setCopiedLink(false);
 
       const response = await fetch(`${API_BASE_URL}/demo/shorten`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ url: cleaned })
+        body: JSON.stringify({ url: cleaned }),
       });
 
       const payload = await response.json();
 
       if (!payload?.data) {
-        throw new Error(payload?.message || 'Failed to shorten URL');
+        throw new Error(payload?.message || "Failed to shorten URL");
       }
 
       const data = payload.data;
@@ -100,16 +101,16 @@ const HeroSection: React.FC = () => {
 
       const finalUrl =
         data?.shortUrl ||
-        `https://links.ziptie.dev/${data?.shortKey ?? 'demo123'}`;
+        `https://links.ziptie.dev/${data?.shortKey ?? "demo123"}`;
 
       setShortUrl(finalUrl);
       setDemoMeta({
         expiresIn: data?.expiresIn ?? 3600,
-        userId: data?.userId ?? 'demo-user',
-        shortKey: data?.shortKey ?? 'demo123'
+        userId: data?.userId ?? "demo-user",
+        shortKey: data?.shortKey ?? "demo123",
       });
     } catch (error: any) {
-      setDemoError(error.message || 'Unexpected error creating short URL');
+      setDemoError(error.message || "Unexpected error creating short URL");
     } finally {
       setDemoLoading(false);
     }
@@ -156,12 +157,16 @@ const HeroSection: React.FC = () => {
         <div className="grid gap-12 lg:grid-cols-2 items-start">
           <div>
             <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight">
-              <span className="heading-glow block">Ship production-ready short links</span>
+              <span className="heading-glow block">
+                Ship production-ready short links
+              </span>
             </h1>
 
             <p className="text-lg lg:text-xl text-gray-300 mb-10 leading-relaxed max-w-xl">
-              Ziptie bundles a key-verifying Node gateway, a Redis-powered shortlink writer, and a battle-tested SDK.
-              Drop the package into any Node runtime, point it at the backend, and your users get expiring links with zero glue code.
+              Ziptie bundles a key-verifying Node gateway, a Redis-powered
+              shortlink writer, and a battle-tested SDK. Drop the package into
+              any Node runtime, point it at the backend, and your users get
+              expiring links with zero glue code.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
@@ -175,7 +180,7 @@ const HeroSection: React.FC = () => {
                 <ArrowRight className="inline ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
-                href="https://github.com/stars/TanmayRokde/lists/ziptite"
+                href="https://github.com/stars/TanmayRokde/lists/ziptie"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border border-gray-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-800/50 hover:border-orange-400 transition-all duration-300 backdrop-blur-sm text-center"
@@ -206,8 +211,12 @@ const HeroSection: React.FC = () => {
             <div className="bg-gray-900/65 border border-gray-700/60 rounded-3xl p-6 backdrop-blur-lg shadow-lg shadow-orange-500/10">
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <p className="text-xs uppercase tracking-wide text-orange-400">Live demo</p>
-                  <h2 className="text-2xl font-semibold text-white">Shorten a URL</h2>
+                  <p className="text-xs uppercase tracking-wide text-orange-400">
+                    Live demo
+                  </p>
+                  <h2 className="text-2xl font-semibold text-white">
+                    Shorten a URL
+                  </h2>
                 </div>
               </div>
               <div className="flex flex-col gap-4 sm:flex-row">
@@ -223,7 +232,7 @@ const HeroSection: React.FC = () => {
                   disabled={demoLoading}
                   className="bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-3 rounded-xl font-semibold hover:shadow-xl hover:shadow-orange-500/40 transition-all duration-300 hover:scale-105 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {demoLoading ? 'Shortening...' : 'Shorten'}
+                  {demoLoading ? "Shortening..." : "Shorten"}
                 </button>
               </div>
               {demoError && (
@@ -233,7 +242,9 @@ const HeroSection: React.FC = () => {
               )}
               <div className="mt-6 grid gap-4 lg:grid-cols-2">
                 <div className="p-4 bg-black/40 border border-gray-700/40 rounded-2xl">
-                  <p className="text-xs uppercase text-gray-500 mb-2">Short link</p>
+                  <p className="text-xs uppercase text-gray-500 mb-2">
+                    Short link
+                  </p>
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-orange-400 font-mono text-sm truncate">
                       {shortUrl}
@@ -251,9 +262,11 @@ const HeroSection: React.FC = () => {
                   </div>
                 </div>
                 <div className="p-4 bg-black/40 border border-gray-700/40 rounded-2xl">
-                  <p className="text-xs uppercase text-gray-500 mb-2">TTL & Metadata</p>
+                  <p className="text-xs uppercase text-gray-500 mb-2">
+                    TTL & Metadata
+                  </p>
                   <pre className="text-xs text-gray-300 overflow-x-auto">
-{`{
+                    {`{
   "expiresIn": ${demoMeta.expiresIn},
   "userId": "${demoMeta.userId}",
   "shortKey": "${demoMeta.shortKey}"
@@ -273,8 +286,12 @@ const HeroSection: React.FC = () => {
                   onClick={copyCode}
                   className="flex items-center space-x-2 text-gray-400 hover:text-orange-400 transition-all duration-300 hover:scale-105"
                 >
-                  {copiedCode ? <CheckCircle className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
-                  <span>{copiedCode ? 'Copied!' : 'Copy'}</span>
+                  {copiedCode ? (
+                    <CheckCircle className="h-5 w-5" />
+                  ) : (
+                    <Copy className="h-5 w-5" />
+                  )}
+                  <span>{copiedCode ? "Copied!" : "Copy"}</span>
                 </button>
               </div>
               <div className="bg-black/80 rounded-xl p-6 text-left border border-gray-800">

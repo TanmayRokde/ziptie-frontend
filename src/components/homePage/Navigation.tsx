@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { Link as LinkIcon, Menu, X } from 'lucide-react';
-import { Link as RouterLink } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link as LinkIcon, Menu, X } from "lucide-react";
+import { Link as RouterLink } from "react-router-dom";
 
-import { useAuth } from '../../contexts/AuthContext';
-import Login from '../auth/Login';
-import Signup from '../auth/Signup';
+import { useAuth } from "../../contexts/AuthContext";
+import Login from "../auth/Login";
+import Signup from "../auth/Signup";
 
 const primaryLinks = [
   {
-    label: 'Docs',
-    href: 'https://github.com/tanmayrokde/ziptie/tree/main/ziptie-mvp-backend#readme',
-    external: true
+    label: "Docs",
+    href: "https://github.com/tanmayrokde/ziptie/tree/main/ziptie-mvp-backend#readme",
+    external: true,
   },
   {
-    label: 'Pricing',
-    href: '/pricing',
-    external: false
+    label: "Pricing",
+    href: "/pricing",
+    external: false,
   },
   {
-    label: 'GitHub',
-    href: 'https://github.com/stars/TanmayRokde/lists/ziptite',
-    external: true
-  }
+    label: "GitHub",
+    href: "https://github.com/stars/TanmayRokde/lists/ziptie",
+    external: true,
+  },
 ];
 
 const Navigation: React.FC = () => {
@@ -34,7 +34,7 @@ const Navigation: React.FC = () => {
     try {
       logout();
     } catch (error) {
-      console.error('Failed to log out', error);
+      console.error("Failed to log out", error);
     }
   };
 
@@ -50,9 +50,9 @@ const Navigation: React.FC = () => {
 
   useEffect(() => {
     const handleOpenLogin = () => setShowLoginModal(true);
-    window.addEventListener('ziptie-open-login', handleOpenLogin);
+    window.addEventListener("ziptie-open-login", handleOpenLogin);
     return () => {
-      window.removeEventListener('ziptie-open-login', handleOpenLogin);
+      window.removeEventListener("ziptie-open-login", handleOpenLogin);
     };
   }, []);
 
@@ -68,34 +68,36 @@ const Navigation: React.FC = () => {
               <span className="text-xl font-semibold text-white tracking-wide">
                 Ziptie
               </span>
-              <span className="text-xs text-gray-500">Shorten • Route • Observe</span>
+              <span className="text-xs text-gray-500">
+                Shorten • Route • Observe
+              </span>
             </div>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
             <div className="flex items-center gap-6">
-            {primaryLinks.map((link) =>
-              link.external ? (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-sm text-gray-300 hover:text-white transition-colors"
-                >
-                  {link.label}
-                </a>
-              ) : (
-                <RouterLink
-                  key={link.label}
-                  to={link.href}
-                  className="text-sm text-gray-300 hover:text-white transition-colors"
-                >
-                  {link.label}
-                </RouterLink>
-              )
-            )}
+              {primaryLinks.map((link) =>
+                link.external ? (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-sm text-gray-300 hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <RouterLink
+                    key={link.label}
+                    to={link.href}
+                    className="text-sm text-gray-300 hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </RouterLink>
+                )
+              )}
             </div>
             {currentUser ? (
               <>
@@ -130,14 +132,18 @@ const Navigation: React.FC = () => {
             )}
           </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
+        </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
