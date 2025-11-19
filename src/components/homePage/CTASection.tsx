@@ -27,7 +27,7 @@ const CTASection: React.FC = () => {
             <ArrowRight className="inline ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform" />
           </a>
           <a
-            href="https://github.com/stars/TanmayRokde/lists/ziptie"
+            href="https://github.com/stars/pradnyaakumbhar/lists/ziptie"
             className="border border-gray-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-800/50 hover:border-orange-400 transition-all duration-300 flex items-center justify-center backdrop-blur-sm hover:scale-105"
             target="_blank"
             rel="noreferrer"

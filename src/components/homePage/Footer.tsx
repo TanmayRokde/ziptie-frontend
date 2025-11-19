@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
           </div>
           <div className="flex items-center space-x-8 text-gray-400">
             <a
-              href="https://www.npmjs.com/package/ziptie-shortlinks"
+              href="https://www.npmjs.com/package/@ziptiejs/ziptie-shortlinks"
               className="hover:text-orange-400 transition-colors"
               target="_blank"
               rel="noreferrer"
@@ -22,23 +22,15 @@ const Footer: React.FC = () => {
               SDK on npm
             </a>
             <a
-              href="https://github.com/stars/TanmayRokde/lists/ziptie"
+              href="https://github.com/TanmayRokde/ziptie-shortlinks"
               className="hover:text-orange-400 transition-colors"
               target="_blank"
               rel="noreferrer"
             >
-              GitHub Repo List
+              NPM package
             </a>
             <a
-              href="https://github.com/tanmayrokde/ziptie/tree/main/ziptie-mvp-backend"
-              className="hover:text-orange-400 transition-colors"
-              target="_blank"
-              rel="noreferrer"
-            >
-              mvp-backend
-            </a>
-            <a
-              href="https://github.com/tanmayrokde/ziptie/tree/main/ziptie-redis-microservice"
+              href="https://github.com/TanmayRokde/ziptie-redis-microservice"
               className="hover:text-orange-400 transition-colors"
               target="_blank"
               rel="noreferrer"
@@ -46,18 +38,18 @@ const Footer: React.FC = () => {
               Redis Microservice
             </a>
             <a
-              href="https://github.com/tanmayrokde/ziptie/tree/main/testtie"
+              href="https://github.com/TanmayRokde/ziptie-mvp-backend"
               className="hover:text-orange-400 transition-colors"
               target="_blank"
               rel="noreferrer"
             >
-              testtie
+              MVP backend
             </a>
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-700/50 text-center text-gray-400">
           <p>
-            &copy; 2024 Ziptie. SDK + gateway + Redis microservice maintained in
+            &copy; 2025 Ziptie. SDK + gateway + Redis microservice maintained in
             one monorepo.
           </p>
         </div>
