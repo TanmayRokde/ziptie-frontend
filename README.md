@@ -64,7 +64,9 @@ Routing is handled client-side via React Router DOM, while API calls go through 
 ## Prerequisites ✅
 
 - Node.js 18+
-- pnpm (preferred) or npm
+- pnpm
+
+> This project is pinned to pnpm; `pnpm-lock.yaml` is the single source of truth. Avoid generating `package-lock.json` to prevent conflicting dependency graphs.
 
 ## Environment Variables 🔧
 
