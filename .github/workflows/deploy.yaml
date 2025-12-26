@@ -21,13 +21,16 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Login to Amazon ECR
+        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build, tag, and push image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_NAME: ziptie-frontend
         run: |
-          IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/ziptie-frontend
-          docker build -t ziptie-frontend .
-          docker tag ziptie-frontend:latest $IMAGE_URI:latest
-          docker tag ziptie-frontend:latest $IMAGE_URI:${{ github.sha }}
-          docker push $IMAGE_URI:latest
-          docker push $IMAGE_URI:${{ github.sha }}
+          docker build -t $IMAGE_NAME .
+          docker tag $IMAGE_NAME:latest $ECR_REGISTRY/$IMAGE_NAME:latest
+          docker tag $IMAGE_NAME:latest $ECR_REGISTRY/$IMAGE_NAME:${GITHUB_SHA}
+          docker push $ECR_REGISTRY/$IMAGE_NAME:latest
+          docker push $ECR_REGISTRY/$IMAGE_NAME:${GITHUB_SHA}
